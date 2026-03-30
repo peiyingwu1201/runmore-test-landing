@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stride — Run Further, Feel More</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream:        oklch(97% 0.015 82);
+      --cream-mid:    oklch(93% 0.022 88);
+      --cream-dark:   oklch(88% 0.03 82);
+      --forest:       oklch(28% 0.09 158);
+      --forest-mid:   oklch(42% 0.11 155);
+      --forest-light: oklch(62% 0.13 150);
+      --terra:        oklch(59% 0.18 46);
+      --terra-pale:   oklch(90% 0.06 65);
+      --text-dark:    oklch(20% 0.04 60);
+      --text-mid:     oklch(50% 0.04 75);
+      --text-on-dk:   oklch(91% 0.025 88);
+      --text-mut-dk:  oklch(65% 0.045 140);
+      --font-d: 'Fraunces', Georgia, serif;
+      --font-b: 'DM Sans', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--cream);
+      color: var(--text-dark);
+      font-family: var(--font-b);
+      font-size: clamp(1rem, 1.2vw, 1.125rem);
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .wrap { width: min(90%, 72rem); margin-inline: auto; }
+
+    /* ── NAV ── */
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: clamp(0.875rem, 1.5vw, 1.25rem) 0;
+      transition: background 0.4s ease, box-shadow 0.4s ease;
+    }
+    .nav.scrolled {
+      background: oklch(97% 0.015 82 / 0.92);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 1px 0 oklch(80% 0.03 80 / 0.4);
+    }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; }
+    .nav-logo {
+      font-family: var(--font-d);
+      font-size: 1.5rem; font-weight: 800;
+      color: var(--forest); text-decoration: none; letter-spacing: -0.02em;
+    }
+    .nav-links { display: flex; gap: clamp(2rem, 4vw, 3.5rem); list-style: none; }
+    @media (max-width: 768px) { .nav-links { display: none; } }
+    .nav-links a {
+      color: var(--text-mid); text-decoration: none;
+      font-size: 0.875rem; transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--text-dark); }
+    .nav-cta {
+      background: var(--terra); color: var(--cream);
+      padding: 0.6rem 1.4rem; border-radius: 100px;
+      text-decoration: none; font-size: 0.875rem; font-weight: 500;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .nav-cta:hover { background: oklch(54% 0.20 46); transform: translateY(-1px); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100dvh;
+      padding-top: clamp(5rem, 12vw, 9rem);
+      padding-bottom: clamp(5rem, 10vw, 9rem);
+      position: relative; overflow: hidden;
+      display: flex; align-items: center;
+    }
+    .hero-topo {
+      position: absolute; right: -5%; top: 50%;
+      transform: translateY(-50%);
+      width: 55%; opacity: 0.07; pointer-events: none;
+    }
+    .hero-inner {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: clamp(3rem, 6vw, 5.5rem); align-items: center;
+    }
+    @media (max-width: 900px) {
+      .hero-inner { grid-template-columns: 1fr; }
+      .hero-phone-col { order: -1; display: flex; justify-content: center; }
+    }
+    .hero-tag {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: var(--terra-pale); color: var(--terra);
+      padding: 0.4rem 1rem; border-radius: 100px;
+      font-size: 0.75rem; font-weight: 500;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      margin-bottom: clamp(1.25rem, 2.5vw, 2rem);
+    }
+    .hero-tag::before {
+      content: ''; width: 6px; height: 6px;
+      background: var(--terra); border-radius: 50%;
+    }
+    .hero-h1 {
+      font-family: var(--font-d);
+      font-size: clamp(3.5rem, 7vw, 6.5rem);
+      font-weight: 800; line-height: 0.95;
+      letter-spacing: -0.03em; color: var(--forest);
+      margin-bottom: clamp(1.25rem, 2.5vw, 2rem);
+    }
+    .hero-h1 em { font-style: italic; color: var(--terra); font-weight: 300; }
+    .hero-desc {
+      color: var(--text-mid);
+      font-size: clamp(1rem, 1.4vw, 1.15rem);
+      max-width: 38ch; line-height: 1.65;
+      margin-bottom: clamp(2rem, 4vw, 3.5rem);
+    }
+    .hero-btns {
+      display: flex; gap: clamp(0.875rem, 1.5vw, 1.25rem);
+      flex-wrap: wrap; margin-bottom: clamp(3rem, 6vw, 5.5rem);
+    }
+    .btn-store {
+      display: flex; align-items: center; gap: 0.65rem;
+      padding: 0.85rem 1.5rem; border-radius: 14px;
+      text-decoration: none; font-weight: 500; font-size: 0.875rem;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .btn-store:hover { transform: translateY(-2px); box-shadow: 0 10px 24px oklch(28% 0.09 158 / 0.2); }
+    .btn-apple { background: var(--forest); color: var(--text-on-dk); }
+    .btn-google {
+      background: transparent; color: var(--forest);
+      border: 1.5px solid oklch(65% 0.08 140);
+    }
+    .btn-lbl { display: flex; flex-direction: column; gap: 0.1em; }
+    .btn-lbl small { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.06em; opacity: 0.65; }
+    .btn-lbl span { font-size: 1rem; font-weight: 600; }
+    .social-proof { display: flex; align-items: center; gap: clamp(0.875rem, 1.5vw, 1.25rem); }
+    .avatars { display: flex; }
+    .avatars span {
+      width: 32px; height: 32px; border-radius: 50%;
+      border: 2px solid var(--cream);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.7rem; font-weight: 600; margin-left: -9px;
+    }
+    .avatars span:first-child { margin-left: 0; }
+    .av1 { background: oklch(72% 0.12 155); color: oklch(25% 0.08 158); }
+    .av2 { background: oklch(78% 0.10 48);  color: oklch(35% 0.12 46); }
+    .av3 { background: oklch(68% 0.08 200); color: oklch(28% 0.06 210); }
+    .av4 { background: oklch(75% 0.07 80);  color: oklch(30% 0.05 78); }
+    .social-proof p { font-size: 0.85rem; color: var(--text-mid); }
+    .social-proof strong { color: var(--text-dark); }
+
+    /* ── PHONE MOCKUP ── */
+    .phone-wrap {
+      position: relative;
+      width: clamp(220px, 28vw, 300px); margin-inline: auto;
+    }
+    .phone-device {
+      width: 100%; aspect-ratio: 9/19.5;
+      background: oklch(18% 0.03 240);
+      border-radius: 44px; padding: 12px;
+      box-shadow:
+        0 40px 100px oklch(20% 0.06 160 / 0.38),
+        0 0 0 1px oklch(35% 0.04 200 / 0.4),
+        inset 0 0 0 1px oklch(55% 0.03 210 / 0.15);
+    }
+    .phone-screen {
+      width: 100%; height: 100%;
+      background: oklch(90% 0.035 128);
+      border-radius: 34px; overflow: hidden; position: relative;
+    }
+    .phone-notch {
+      position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+      width: 35%; height: 26px;
+      background: oklch(18% 0.03 240);
+      border-radius: 0 0 18px 18px; z-index: 10;
+    }
+    .phone-map { position: absolute; inset: 0; }
+    .phone-map svg { width: 100%; height: 100%; }
+    .phone-stats {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      background: var(--cream);
+      border-radius: 20px 20px 34px 34px;
+      padding: 14px 16px 22px;
+    }
+    .ph-run-lbl {
+      font-size: 8px; font-weight: 500; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--forest-light); margin-bottom: 6px;
+    }
+    .ph-time {
+      font-family: var(--font-d); font-size: 26px; font-weight: 700;
+      color: var(--forest); letter-spacing: -0.02em; line-height: 1; margin-bottom: 10px;
+    }
+    .ph-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+    .ph-val {
+      font-family: var(--font-d); font-size: 14px; font-weight: 700;
+      color: var(--text-dark); letter-spacing: -0.02em;
+    }
+    .ph-key {
+      font-size: 7px; text-transform: uppercase; letter-spacing: 0.1em;
+      color: var(--text-mid); margin-top: 1px;
+    }
+    .ph-btn {
+      width: 100%; margin-top: 12px;
+      background: var(--terra); color: oklch(97% 0.015 82);
+      border: none; border-radius: 50px; padding: 9px;
+      font-size: 10px; font-weight: 600; letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    /* floating badges */
+    .badge {
+      position: absolute; right: -22px; top: 28%;
+      background: var(--cream); border-radius: 14px;
+      padding: 9px 13px; box-shadow: 0 8px 32px oklch(20% 0.06 160 / 0.22);
+      display: flex; align-items: center; gap: 8px;
+      font-size: 10px; white-space: nowrap;
+      animation: floatY 3s ease-in-out infinite;
+    }
+    .badge-2 { right: auto; left: -28px; top: auto; bottom: 26%; animation-delay: 1.5s; }
+    @media (max-width: 900px) { .badge { display: none; } }
+    .badge-ico {
+      width: 26px; height: 26px; border-radius: 8px;
+      background: var(--terra-pale);
+      display: flex; align-items: center; justify-content: center; font-size: 13px;
+    }
+    .badge strong { display: block; font-size: 12px; font-weight: 700; color: var(--text-dark); }
+    .badge small { color: var(--text-mid); font-size: 9px; }
+    @keyframes floatY {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(-7px); }
+    }
+
+    /* route draw animation */
+    .route { stroke-dasharray: 1200; stroke-dashoffset: 1200; }
+    .route.drawn { animation: drawRoute 2.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+    @keyframes drawRoute { to { stroke-dashoffset: 0; } }
+    @media (prefers-reduced-motion: reduce) { .route { stroke-dashoffset: 0; animation: none; } }
+
+    /* ── MANIFESTO ── */
+    .manifesto {
+      background: var(--forest); padding: clamp(5rem, 10vw, 9rem) 0;
+      position: relative; overflow: hidden;
+    }
+    .manifesto::before {
+      content: ''; position: absolute; inset: 0;
+      background-image: repeating-linear-gradient(
+        90deg, oklch(90% 0.03 88 / 0.06) 0, oklch(90% 0.03 88 / 0.06) 1px,
+        transparent 1px, transparent 64px
+      );
+    }
+    .m-label {
+      font-size: 0.7rem; font-weight: 500; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--text-mut-dk);
+      margin-bottom: clamp(1.25rem, 2.5vw, 2rem);
+    }
+    .m-quote {
+      font-family: var(--font-d);
+      font-size: clamp(2rem, 4.5vw, 4rem);
+      font-weight: 300; line-height: 1.15;
+      letter-spacing: -0.02em; color: var(--text-on-dk);
+      max-width: 22ch;
+    }
+    .m-quote em { font-style: italic; color: oklch(76% 0.12 85); }
+    .m-rule { width: 48px; height: 2px; background: var(--terra); margin-top: clamp(2rem, 4vw, 3.5rem); }
+
+    /* ── FEATURES ── */
+    .features { padding: clamp(7rem, 14vw, 13rem) 0; }
+    .sec-label {
+      font-size: 0.7rem; font-weight: 500; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--terra);
+      margin-bottom: clamp(0.875rem, 1.5vw, 1.25rem);
+    }
+    .sec-title {
+      font-family: var(--font-d);
+      font-size: clamp(2.2rem, 4vw, 3.5rem);
+      font-weight: 700; line-height: 1.1;
+      letter-spacing: -0.02em; color: var(--forest);
+      margin-bottom: clamp(5rem, 10vw, 9rem);
+    }
+    .feat {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: clamp(3rem, 6vw, 5.5rem); align-items: center;
+      padding: clamp(3rem, 6vw, 5.5rem) 0;
+      border-top: 1px solid oklch(80% 0.02 85);
+    }
+    .feat:last-child { border-bottom: 1px solid oklch(80% 0.02 85); }
+    .feat.rev .feat-vis { order: -1; }
+    @media (max-width: 768px) {
+      .feat { grid-template-columns: 1fr; }
+      .feat.rev .feat-vis { order: 0; }
+    }
+    .feat-num {
+      font-family: var(--font-d); font-size: 0.85rem; font-style: italic;
+      color: var(--text-mid); margin-bottom: clamp(0.875rem, 1.5vw, 1.25rem);
+    }
+    .feat-name {
+      font-family: var(--font-d);
+      font-size: clamp(1.8rem, 3vw, 2.8rem);
+      font-weight: 700; line-height: 1.1;
+      letter-spacing: -0.02em; color: var(--forest);
+      margin-bottom: clamp(0.875rem, 1.5vw, 1.25rem);
+    }
+    .feat-desc { color: var(--text-mid); font-size: 0.95rem; line-height: 1.7; max-width: 38ch; }
+    .feat-vis {
+      aspect-ratio: 4/3; border-radius: 20px;
+      background: var(--cream-mid); overflow: hidden;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .feat-vis svg { width: 100%; height: 100%; }
+
+    /* ── SOCIAL PROOF ── */
+    .quotes-sec { background: var(--cream-mid); padding: clamp(5rem, 10vw, 9rem) 0; }
+    .q-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: clamp(2rem, 4vw, 3.5rem); margin-top: clamp(3rem, 6vw, 5.5rem);
+    }
+    .q-item { border-top: 2px solid var(--cream-dark); padding-top: clamp(1.25rem, 2.5vw, 2rem); }
+    .q-text {
+      font-family: var(--font-d); font-style: italic; font-weight: 300;
+      font-size: clamp(1rem, 1.3vw, 1.15rem); line-height: 1.6; color: var(--text-dark);
+      margin-bottom: clamp(0.875rem, 1.5vw, 1.25rem);
+    }
+    .q-by { font-size: 0.8rem; color: var(--text-mid); }
+    .q-by strong { display: block; color: var(--text-dark); font-weight: 500; margin-bottom: 2px; }
+
+    /* ── DOWNLOAD ── */
+    .dl-sec {
+      background: var(--forest); padding: clamp(7rem, 14vw, 13rem) 0;
+      position: relative; overflow: hidden;
+    }
+    .dl-topo {
+      position: absolute; left: 50%; top: 50%;
+      transform: translate(-50%, -50%);
+      opacity: 0.05; width: 130%; pointer-events: none;
+    }
+    .dl-inner { position: relative; z-index: 1; }
+    .dl-label { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--text-mut-dk); margin-bottom: clamp(0.875rem, 1.5vw, 1.25rem);
+    }
+    .dl-title {
+      font-family: var(--font-d);
+      font-size: clamp(3rem, 6vw, 5.5rem);
+      font-weight: 800; line-height: 1; letter-spacing: -0.03em;
+      color: var(--text-on-dk); margin-bottom: clamp(1.25rem, 2.5vw, 2rem);
+    }
+    .dl-title em { font-style: italic; font-weight: 300; color: oklch(76% 0.12 85); }
+    .dl-sub {
+      color: var(--text-mut-dk); font-size: clamp(0.95rem, 1.3vw, 1.1rem);
+      max-width: 42ch; line-height: 1.65; margin-bottom: clamp(2rem, 4vw, 3.5rem);
+    }
+    .dl-btns { display: flex; gap: clamp(0.875rem, 1.5vw, 1.25rem); flex-wrap: wrap; }
+    .btn-solid {
+      background: var(--terra); color: oklch(97% 0.015 82);
+      border: 1px solid transparent;
+    }
+    .btn-solid:hover { background: oklch(64% 0.18 46); }
+    .btn-ghost {
+      background: oklch(97% 0.015 82 / 0.1);
+      color: var(--text-on-dk);
+      border: 1px solid oklch(90% 0.02 88 / 0.2);
+    }
+    .btn-ghost:hover { background: oklch(97% 0.015 82 / 0.18); }
+
+    /* ── FOOTER ── */
+    .footer {
+      background: oklch(22% 0.07 158); padding: clamp(1.25rem, 2.5vw, 2rem) 0;
+    }
+    .footer-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: clamp(0.875rem, 1.5vw, 1.25rem);
+    }
+    .f-logo { font-family: var(--font-d); font-size: 1.2rem; font-weight: 800;
+      color: oklch(72% 0.06 155); letter-spacing: -0.02em;
+    }
+    .f-links { display: flex; gap: clamp(1.25rem, 2.5vw, 2rem); list-style: none; }
+    .f-links a { font-size: 0.8rem; color: oklch(52% 0.04 155); text-decoration: none; transition: color 0.2s; }
+    .f-links a:hover { color: oklch(72% 0.06 155); }
+    .f-copy { font-size: 0.8rem; color: oklch(48% 0.04 155); }
+
+    /* ── REVEAL ANIMATION ── */
+    [data-r] {
+      opacity: 0; transform: translateY(22px);
+      transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    [data-r].in { opacity: 1; transform: translateY(0); }
+    [data-r][data-d="1"] { transition-delay: 0.1s; }
+    [data-r][data-d="2"] { transition-delay: 0.2s; }
+    [data-r][data-d="3"] { transition-delay: 0.3s; }
+    [data-r][data-d="4"] { transition-delay: 0.4s; }
+    @media (prefers-reduced-motion: reduce) {
+      [data-r] { opacity: 1; transform: none; transition: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <div class="wrap">
+    <div class="nav-inner">
+      <a href="#" class="nav-logo">STRIDE</a>
+      <ul class="nav-links">
+        <li><a href="#features">Features</a></li>
+        <li><a href="#community">Stories</a></li>
+        <li><a href="#download">Download</a></li>
+      </ul>
+      <a href="#download" class="nav-cta">Get the App</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <!-- topo lines decoration -->
+  <svg class="hero-topo" viewBox="0 0 600 600" fill="none" aria-hidden="true">
+    <ellipse cx="300" cy="300" rx="280" ry="196" stroke="var(--forest)" stroke-width="1.5"/>
+    <ellipse cx="300" cy="300" rx="240" ry="163" stroke="var(--forest)" stroke-width="1.5"/>
+    <ellipse cx="300" cy="300" rx="200" ry="130" stroke="var(--forest)" stroke-width="1.5"/>
+    <ellipse cx="300" cy="300" rx="160" ry="98"  stroke="var(--forest)" stroke-width="1.5"/>
+    <ellipse cx="300" cy="300" rx="118" ry="67"  stroke="var(--forest)" stroke-width="1.5"/>
+    <ellipse cx="300" cy="300" rx="78"  cy="38"  stroke="var(--forest)" stroke-width="1.5"/>
+    <ellipse cx="280" cy="310" rx="270" ry="175" stroke="var(--forest)" stroke-width="1" transform="rotate(-12 280 310)"/>
+    <ellipse cx="280" cy="310" rx="210" ry="135" stroke="var(--forest)" stroke-width="1" transform="rotate(-12 280 310)"/>
+    <ellipse cx="280" cy="310" rx="150" ry="95"  stroke="var(--forest)" stroke-width="1" transform="rotate(-12 280 310)"/>
+  </svg>
+
+  <div class="wrap">
+    <div class="hero-inner">
+      <!-- text -->
+      <div>
+        <div class="hero-tag" data-r>Your running companion</div>
+        <h1 class="hero-h1" data-r data-d="1">
+          Run<br><em>further.</em><br>Feel<br><em>more.</em>
+        </h1>
+        <p class="hero-desc" data-r data-d="2">
+          Stride is built for people who run for life, not just for races.
+          Simple recording, beautiful routes, just enough data to keep you going.
+        </p>
+        <div class="hero-btns" data-r data-d="3">
+          <a href="#download" class="btn-store btn-apple">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+            </svg>
+            <div class="btn-lbl"><small>Download on the</small><span>App Store</span></div>
+          </a>
+          <a href="#download" class="btn-store btn-google">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M3.18 23.76c.3.17.64.24.99.19l12.47-7.19-2.71-2.71-10.75 9.71zm-1.15-20.7C1.78 3.4 1.63 3.79 1.63 4.27v15.46c0 .48.15.87.4 1.17l.06.06 8.66-8.66v-.2L2.03 3.06zM20.33 10.53l-2.52-1.45-2.99 2.99 2.99 2.99 2.53-1.46c.72-.42.72-1.65-.01-2.07zm-17.15 12.5l.06.06 8.66-8.66v-.2L3.18 6.44l-.06-.06c-.3.17-.49.49-.49.85v15.5c0 .36.19.68.49.85l.06-.06z"/>
+            </svg>
+            <div class="btn-lbl"><small>Get it on</small><span>Google Play</span></div>
+          </a>
+        </div>
+        <div class="social-proof" data-r data-d="4">
+          <div class="avatars">
+            <span class="av1">M</span><span class="av2">S</span>
+            <span class="av3">K</span><span class="av4">L</span>
+          </div>
+          <p>Joined by <strong>12,400+</strong> runners this month</p>
+        </div>
+      </div>
+
+      <!-- phone -->
+      <div class="hero-phone-col" data-r data-d="2">
+        <div class="phone-wrap">
+          <div class="badge">
+            <div class="badge-ico">🏃</div>
+            <div><strong>New PR!</strong><small>5K · 26:42</small></div>
+          </div>
+          <div class="badge badge-2">
+            <div class="badge-ico">❤️</div>
+            <div><strong>Zone 2</strong><small>148 bpm</small></div>
+          </div>
+          <div class="phone-device">
+            <div class="phone-notch"></div>
+            <div class="phone-screen">
+              <div class="phone-map">
+                <svg viewBox="0 0 300 580" xmlns="http://www.w3.org/2000/svg">
+                  <!-- map bg -->
+                  <rect width="300" height="580" fill="oklch(90% 0.032 128)"/>
+                  <!-- streets -->
+                  <line x1="0"   y1="120" x2="300" y2="120" stroke="oklch(98% 0.01 88)" stroke-width="8"/>
+                  <line x1="0"   y1="205" x2="300" y2="205" stroke="oklch(98% 0.01 88)" stroke-width="5"/>
+                  <line x1="0"   y1="290" x2="300" y2="318" stroke="oklch(98% 0.01 88)" stroke-width="8"/>
+                  <line x1="0"   y1="390" x2="300" y2="378" stroke="oklch(98% 0.01 88)" stroke-width="5"/>
+                  <line x1="60"  y1="0"   x2="60"  y2="580" stroke="oklch(98% 0.01 88)" stroke-width="5"/>
+                  <line x1="145" y1="0"   x2="145" y2="580" stroke="oklch(98% 0.01 88)" stroke-width="8"/>
+                  <line x1="225" y1="0"   x2="225" y2="580" stroke="oklch(98% 0.01 88)" stroke-width="5"/>
+                  <!-- park blocks -->
+                  <rect x="162" y="130" width="55" height="65" rx="4" fill="oklch(72% 0.13 148)" opacity="0.55"/>
+                  <rect x="8"   y="215" width="44" height="65" rx="4" fill="oklch(72% 0.13 148)" opacity="0.55"/>
+                  <!-- running route -->
+                  <path class="route"
+                    d="M 145 530 L 145 390 Q 155 355 185 345 L 225 345 Q 255 345 255 315 L 255 205 Q 255 170 225 160 L 162 160 Q 145 160 145 140 L 145 80 Q 145 50 122 42 L 82 42 Q 60 42 60 62 L 60 205 Q 60 225 82 235 L 145 255 Q 165 265 162 290 L 145 410 L 145 530"
+                    fill="none" stroke="var(--terra)" stroke-width="3.5"
+                    stroke-linecap="round" stroke-linejoin="round"/>
+                  <!-- start dot -->
+                  <circle cx="145" cy="530" r="7"  fill="var(--terra)" opacity="0.9"/>
+                  <circle cx="145" cy="530" r="13" fill="var(--terra)" opacity="0.22"/>
+                  <!-- current position -->
+                  <circle cx="145" cy="80" r="7"  fill="var(--forest)"/>
+                  <circle cx="145" cy="80" r="13" fill="var(--forest)" opacity="0.28"/>
+                </svg>
+              </div>
+              <div class="phone-stats">
+                <div class="ph-run-lbl">Active run</div>
+                <div class="ph-time">34:18</div>
+                <div class="ph-grid">
+                  <div><div class="ph-val">5.2</div><div class="ph-key">km</div></div>
+                  <div><div class="ph-val">6:35</div><div class="ph-key">pace /km</div></div>
+                  <div><div class="ph-val">148</div><div class="ph-key">bpm</div></div>
+                </div>
+                <button class="ph-btn">Pause Run</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MANIFESTO -->
+<section class="manifesto">
+  <div class="wrap">
+    <p class="m-label" data-r>Our philosophy</p>
+    <blockquote class="m-quote" data-r data-d="1">
+      Running isn't about<br>
+      <em>beating a clock.</em><br>
+      It's about showing up,<br>
+      day after day, going<br>
+      a little further than before.
+    </blockquote>
+    <div class="m-rule" data-r data-d="2"></div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="features" id="features">
+  <div class="wrap">
+    <p class="sec-label" data-r>What Stride does</p>
+    <h2 class="sec-title" data-r data-d="1">Everything you need.<br>Nothing you don't.</h2>
+
+    <!-- Feature 1 -->
+    <div class="feat">
+      <div data-r>
+        <p class="feat-num">01 — Pace</p>
+        <h3 class="feat-name">Your pace,<br>your way.</h3>
+        <p class="feat-desc">
+          See current, average, and target pace at a glance. Set a comfortable rhythm
+          and let Stride guide you — no obsessive alerts, just useful information.
+        </p>
+      </div>
+      <div class="feat-vis" data-r data-d="1">
+        <svg viewBox="0 0 320 240" xmlns="http://www.w3.org/2000/svg">
+          <rect width="320" height="240" fill="var(--cream)"/>
+          <text x="24" y="36" font-family="DM Sans, sans-serif" font-size="10" fill="oklch(55% 0.04 75)" letter-spacing="0.1em">PACE / KM</text>
+          <!-- grid lines -->
+          <line x1="24" y1="175" x2="296" y2="175" stroke="oklch(84% 0.02 85)" stroke-width="1"/>
+          <line x1="24" y1="135" x2="296" y2="135" stroke="oklch(84% 0.02 85)" stroke-width="1" stroke-dasharray="3 5"/>
+          <line x1="24" y1="95"  x2="296" y2="95"  stroke="oklch(84% 0.02 85)" stroke-width="1" stroke-dasharray="3 5"/>
+          <!-- area -->
+          <path d="M 24 140 Q 60 152 100 134 Q 136 116 168 128 Q 204 140 240 120 Q 272 102 296 112 L 296 175 L 24 175 Z"
+            fill="var(--terra)" opacity="0.1"/>
+          <!-- pace line -->
+          <path d="M 24 140 Q 60 152 100 134 Q 136 116 168 128 Q 204 140 240 120 Q 272 102 296 112"
+            stroke="var(--terra)" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+          <!-- current label -->
+          <rect x="194" y="56" width="88" height="40" rx="10" fill="var(--forest)"/>
+          <text x="214" y="73" font-family="Fraunces, serif" font-size="17" fill="oklch(91% 0.025 88)" font-weight="700">6:35</text>
+          <text x="214" y="87" font-family="DM Sans, sans-serif" font-size="8" fill="oklch(65% 0.045 140)" letter-spacing="0.05em">current pace</text>
+          <!-- x labels -->
+          <text x="24"  y="196" font-family="DM Sans, sans-serif" font-size="9" fill="oklch(55% 0.04 75)">1km</text>
+          <text x="92"  y="196" font-family="DM Sans, sans-serif" font-size="9" fill="oklch(55% 0.04 75)">2km</text>
+          <text x="158" y="196" font-family="DM Sans, sans-serif" font-size="9" fill="oklch(55% 0.04 75)">3km</text>
+          <text x="224" y="196" font-family="DM Sans, sans-serif" font-size="9" fill="oklch(55% 0.04 75)">4km</text>
+          <text x="280" y="196" font-family="DM Sans, sans-serif" font-size="9" fill="oklch(55% 0.04 75)">5km</text>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Feature 2 -->
+    <div class="feat rev">
+      <div data-r>
+        <p class="feat-num">02 — Route</p>
+        <h3 class="feat-name">Every path,<br>beautifully mapped.</h3>
+        <p class="feat-desc">
+          GPS tracking that captures every turn of your favorite routes. Review your runs
+          on a clean, distraction-free map. Discover new paths in your neighborhood.
+        </p>
+      </div>
+      <div class="feat-vis" data-r data-d="1">
+        <svg viewBox="0 0 320 240" xmlns="http://www.w3.org/2000/svg">
+          <rect width="320" height="240" fill="oklch(86% 0.04 145)"/>
+          <!-- terrain -->
+          <ellipse cx="160" cy="120" rx="110" ry="82" fill="oklch(76% 0.10 148)" opacity="0.45"/>
+          <ellipse cx="148" cy="114" rx="72"  ry="55" fill="oklch(68% 0.12 148)" opacity="0.45"/>
+          <!-- streets -->
+          <line x1="0"   y1="84"  x2="320" y2="84"  stroke="oklch(98% 0.01 88)" stroke-width="6"/>
+          <line x1="0"   y1="156" x2="320" y2="156" stroke="oklch(98% 0.01 88)" stroke-width="6"/>
+          <line x1="94"  y1="0"   x2="94"  y2="240" stroke="oklch(98% 0.01 88)" stroke-width="6"/>
+          <line x1="226" y1="0"   x2="226" y2="240" stroke="oklch(98% 0.01 88)" stroke-width="6"/>
+          <!-- route -->
+          <path d="M 94 195 L 94 156 Q 94 118 126 106 L 180 94 Q 226 84 226 84 L 226 46"
+            stroke="var(--terra)" stroke-width="4.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="94"  cy="195" r="7"  fill="var(--terra)"/>
+          <circle cx="94"  cy="195" r="12" fill="var(--terra)" opacity="0.28"/>
+          <circle cx="226" cy="46"  r="7"  fill="var(--forest)"/>
+          <circle cx="226" cy="46"  r="12" fill="var(--forest)" opacity="0.28"/>
+          <!-- distance pill -->
+          <rect x="118" y="132" width="68" height="26" rx="13" fill="oklch(97% 0.015 82)" opacity="0.96"/>
+          <text x="152" y="149" font-family="Fraunces, serif" font-size="13" fill="var(--forest)" font-weight="700" text-anchor="middle">7.4 km</text>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Feature 3 -->
+    <div class="feat">
+      <div data-r>
+        <p class="feat-num">03 — Heart Rate</p>
+        <h3 class="feat-name">Train smart,<br>not hard.</h3>
+        <p class="feat-desc">
+          Heart rate zones help you run at the right intensity — aerobic base, fat burn,
+          or peak effort. Run smarter today; run longer for years to come.
+        </p>
+      </div>
+      <div class="feat-vis" data-r data-d="1">
+        <svg viewBox="0 0 320 240" xmlns="http://www.w3.org/2000/svg">
+          <rect width="320" height="240" fill="var(--cream)"/>
+          <!-- zone bars -->
+          <rect x="24" y="28"  width="272" height="24" rx="5" fill="oklch(52% 0.20 22)" opacity="0.15"/>
+          <rect x="24" y="28"  width="46"  height="24" rx="5" fill="oklch(52% 0.20 22)" opacity="0.8"/>
+          <text x="78" y="44"  font-family="DM Sans, sans-serif" font-size="10" fill="var(--text-dark)">Zone 5 · Peak · 176–190 bpm</text>
+
+          <rect x="24" y="58"  width="272" height="24" rx="5" fill="oklch(58% 0.20 34)" opacity="0.15"/>
+          <rect x="24" y="58"  width="100" height="24" rx="5" fill="oklch(58% 0.20 34)" opacity="0.8"/>
+          <text x="132" y="74" font-family="DM Sans, sans-serif" font-size="10" fill="var(--text-dark)">Zone 4 · Hard · 162–176 bpm</text>
+
+          <rect x="24" y="88"  width="272" height="24" rx="5" fill="var(--terra)" opacity="0.15"/>
+          <rect x="24" y="88"  width="140" height="24" rx="5" fill="var(--terra)" opacity="0.75"/>
+          <text x="172" y="104" font-family="DM Sans, sans-serif" font-size="10" fill="var(--text-dark)">Zone 3 · Tempo · 148–162</text>
+
+          <!-- zone 2 highlighted -->
+          <rect x="24" y="118" width="272" height="28" rx="5" fill="var(--forest)" opacity="0.12"/>
+          <rect x="24" y="118" width="200" height="28" rx="5" fill="var(--forest)"/>
+          <text x="34" y="136" font-family="DM Sans, sans-serif" font-size="10" fill="oklch(91% 0.025 88)" font-weight="500">NOW — Zone 2 · Aerobic · 135–148 bpm</text>
+
+          <rect x="24" y="152" width="272" height="24" rx="5" fill="oklch(62% 0.11 148)" opacity="0.15"/>
+          <rect x="24" y="152" width="240" height="24" rx="5" fill="oklch(62% 0.11 148)" opacity="0.55"/>
+          <text x="34" y="168" font-family="DM Sans, sans-serif" font-size="10" fill="var(--forest)">Zone 1 · Light · under 135 bpm</text>
+
+          <!-- current bpm -->
+          <text x="24" y="210" font-family="Fraunces, serif" font-size="22" fill="var(--forest)" font-weight="700">148</text>
+          <text x="62" y="210" font-family="DM Sans, sans-serif" font-size="10" fill="oklch(55% 0.04 75)" dy="2">bpm · optimal aerobic zone</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- QUOTES -->
+<section class="quotes-sec" id="community">
+  <div class="wrap">
+    <p class="sec-label" data-r>From the community</p>
+    <h2 class="sec-title" style="margin-bottom: 0" data-r data-d="1">
+      Built for runners<br>who run for life.
+    </h2>
+    <div class="q-grid">
+      <div class="q-item" data-r>
+        <p class="q-text">"I've tried every running app. Stride is the first one that doesn't make me feel like I need to check it every 30 seconds. It just... runs with me."</p>
+        <div class="q-by"><strong>Maya Chen</strong>Running since 2019 · 4× a week</div>
+      </div>
+      <div class="q-item" data-r data-d="1">
+        <p class="q-text">"The heart rate zones changed how I train. I used to go too hard every run. Now I'm consistent, and I actually enjoy it."</p>
+        <div class="q-by"><strong>David Park</strong>Casual runner · 3 years with Stride</div>
+      </div>
+      <div class="q-item" data-r data-d="2">
+        <p class="q-text">"My running routes have become like a journal. I can see where I ran on my birthday last year. It's more personal than I expected."</p>
+        <div class="q-by"><strong>Lena Torres</strong>Morning runner · 1,200+ km logged</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DOWNLOAD -->
+<section class="dl-sec" id="download">
+  <svg class="dl-topo" viewBox="0 0 900 400" fill="none" aria-hidden="true">
+    <ellipse cx="450" cy="200" rx="420" ry="190" stroke="oklch(90% 0.03 88)" stroke-width="1.5"/>
+    <ellipse cx="450" cy="200" rx="350" ry="155" stroke="oklch(90% 0.03 88)" stroke-width="1.5"/>
+    <ellipse cx="450" cy="200" rx="280" ry="120" stroke="oklch(90% 0.03 88)" stroke-width="1.5"/>
+    <ellipse cx="450" cy="200" rx="210" ry="86"  stroke="oklch(90% 0.03 88)" stroke-width="1.5"/>
+    <ellipse cx="450" cy="200" rx="140" ry="54"  stroke="oklch(90% 0.03 88)" stroke-width="1.5"/>
+    <ellipse cx="450" cy="200" rx="70"  cy="24"  stroke="oklch(90% 0.03 88)" stroke-width="1.5"/>
+  </svg>
+  <div class="wrap">
+    <div class="dl-inner">
+      <p class="dl-label" data-r>Start today</p>
+      <h2 class="dl-title" data-r data-d="1">Your first step<br>starts <em>now.</em></h2>
+      <p class="dl-sub" data-r data-d="2">
+        Free to download. No subscription to start.
+        Join 12,000+ runners who've made Stride part of their daily life.
+      </p>
+      <div class="dl-btns" data-r data-d="3">
+        <a href="#" class="btn-store btn-solid">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+          </svg>
+          <div class="btn-lbl"><small>Download on the</small><span>App Store</span></div>
+        </a>
+        <a href="#" class="btn-store btn-ghost">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M3.18 23.76c.3.17.64.24.99.19l12.47-7.19-2.71-2.71-10.75 9.71zm-1.15-20.7C1.78 3.4 1.63 3.79 1.63 4.27v15.46c0 .48.15.87.4 1.17l.06.06 8.66-8.66v-.2L2.03 3.06zM20.33 10.53l-2.52-1.45-2.99 2.99 2.99 2.99 2.53-1.46c.72-.42.72-1.65-.01-2.07zm-17.15 12.5l.06.06 8.66-8.66v-.2L3.18 6.44l-.06-.06c-.3.17-.49.49-.49.85v15.5c0 .36.19.68.49.85l.06-.06z"/>
+          </svg>
+          <div class="btn-lbl"><small>Get it on</small><span>Google Play</span></div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-inner">
+      <span class="f-logo">STRIDE</span>
+      <ul class="f-links">
+        <li><a href="#">Privacy</a></li>
+        <li><a href="#">Terms</a></li>
+        <li><a href="#">Support</a></li>
+      </ul>
+      <p class="f-copy">© 2026 Stride. Built for runners.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Nav scroll style
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 50);
+  }, { passive: true });
+
+  // Scroll reveal
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -48px 0px' });
+
+  document.querySelectorAll('[data-r]').forEach(el => io.observe(el));
+
+  // Hero: trigger immediately on load
+  window.addEventListener('load', () => {
+    document.querySelectorAll('.hero [data-r]').forEach(el => el.classList.add('in'));
+    // Trigger route draw animation
+    setTimeout(() => {
+      const route = document.querySelector('.route');
+      if (route) route.classList.add('drawn');
+    }, 400);
+  });
+</script>
+</body>
+</html>
