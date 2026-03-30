@@ -11,26 +11,28 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --cream:        oklch(97% 0.015 82);
-      --cream-mid:    oklch(93% 0.022 88);
-      --cream-dark:   oklch(88% 0.03 82);
-      --forest:       oklch(28% 0.09 158);
-      --forest-mid:   oklch(42% 0.11 155);
-      --forest-light: oklch(62% 0.13 150);
-      --terra:        oklch(59% 0.18 46);
-      --terra-pale:   oklch(90% 0.06 65);
-      --text-dark:    oklch(20% 0.04 60);
-      --text-mid:     oklch(50% 0.04 75);
-      --text-on-dk:   oklch(91% 0.025 88);
-      --text-mut-dk:  oklch(65% 0.045 140);
+      /* Fresh, airy palette */
+      --bg:          oklch(98.5% 0.010 148);   /* near-white sage */
+      --bg-sage:     oklch(94%   0.022 148);   /* light sage panel */
+      --bg-deep:     oklch(40%   0.13  158);   /* medium-deep green */
+      --green:       oklch(43%   0.14  158);   /* primary green */
+      --green-mid:   oklch(58%   0.15  152);   /* mid green */
+      --green-light: oklch(74%   0.14  148);   /* bright green */
+      --lime:        oklch(68%   0.20  138);   /* fresh lime accent */
+      --lime-pale:   oklch(93%   0.07  138);   /* very pale lime */
+      --lime-mid:    oklch(84%   0.12  138);   /* soft lime */
+      --text-dark:   oklch(22%   0.04  155);   /* near-black, green-tinted */
+      --text-mid:    oklch(52%   0.05  155);   /* medium, green-tinted */
+      --text-on-dk:  oklch(95%   0.018 148);   /* light on dark */
+      --text-mut-dk: oklch(72%   0.06  148);   /* muted on dark */
+      --divider:     oklch(88%   0.025 148);   /* dividers */
       --font-d: 'Fraunces', Georgia, serif;
       --font-b: 'DM Sans', sans-serif;
     }
 
     html { scroll-behavior: smooth; }
-
     body {
-      background: var(--cream);
+      background: var(--bg);
       color: var(--text-dark);
       font-family: var(--font-b);
       font-size: clamp(1rem, 1.2vw, 1.125rem);
@@ -38,25 +40,23 @@
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
     }
-
     .wrap { width: min(90%, 72rem); margin-inline: auto; }
 
-    /* ── NAV ── */
+    /* ─── NAV ─── */
     .nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       padding: clamp(0.875rem, 1.5vw, 1.25rem) 0;
       transition: background 0.4s ease, box-shadow 0.4s ease;
     }
     .nav.scrolled {
-      background: oklch(97% 0.015 82 / 0.92);
-      backdrop-filter: blur(12px);
-      box-shadow: 0 1px 0 oklch(80% 0.03 80 / 0.4);
+      background: oklch(98.5% 0.010 148 / 0.92);
+      backdrop-filter: blur(14px);
+      box-shadow: 0 1px 0 var(--divider);
     }
     .nav-inner { display: flex; align-items: center; justify-content: space-between; }
     .nav-logo {
-      font-family: var(--font-d);
-      font-size: 1.5rem; font-weight: 800;
-      color: var(--forest); text-decoration: none; letter-spacing: -0.02em;
+      font-family: var(--font-d); font-size: 1.5rem; font-weight: 800;
+      color: var(--green); text-decoration: none; letter-spacing: -0.02em;
     }
     .nav-links { display: flex; gap: clamp(2rem, 4vw, 3.5rem); list-style: none; }
     @media (max-width: 768px) { .nav-links { display: none; } }
@@ -66,14 +66,14 @@
     }
     .nav-links a:hover { color: var(--text-dark); }
     .nav-cta {
-      background: var(--terra); color: var(--cream);
+      background: var(--lime); color: oklch(22% 0.07 145);
       padding: 0.6rem 1.4rem; border-radius: 100px;
-      text-decoration: none; font-size: 0.875rem; font-weight: 500;
+      text-decoration: none; font-size: 0.875rem; font-weight: 600;
       transition: background 0.2s, transform 0.15s;
     }
-    .nav-cta:hover { background: oklch(54% 0.20 46); transform: translateY(-1px); }
+    .nav-cta:hover { background: oklch(63% 0.21 138); transform: translateY(-1px); }
 
-    /* ── HERO ── */
+    /* ─── HERO ─── */
     .hero {
       min-height: 100dvh;
       padding-top: clamp(5rem, 12vw, 9rem);
@@ -82,9 +82,9 @@
       display: flex; align-items: center;
     }
     .hero-topo {
-      position: absolute; right: -5%; top: 50%;
+      position: absolute; right: -4%; top: 50%;
       transform: translateY(-50%);
-      width: 55%; opacity: 0.07; pointer-events: none;
+      width: 56%; opacity: 0.055; pointer-events: none;
     }
     .hero-inner {
       display: grid; grid-template-columns: 1fr 1fr;
@@ -96,24 +96,24 @@
     }
     .hero-tag {
       display: inline-flex; align-items: center; gap: 0.5rem;
-      background: var(--terra-pale); color: var(--terra);
+      background: var(--lime-pale); color: var(--green);
       padding: 0.4rem 1rem; border-radius: 100px;
-      font-size: 0.75rem; font-weight: 500;
-      letter-spacing: 0.06em; text-transform: uppercase;
+      font-size: 0.75rem; font-weight: 600;
+      letter-spacing: 0.07em; text-transform: uppercase;
       margin-bottom: clamp(1.25rem, 2.5vw, 2rem);
     }
     .hero-tag::before {
       content: ''; width: 6px; height: 6px;
-      background: var(--terra); border-radius: 50%;
+      background: var(--lime); border-radius: 50%;
     }
     .hero-h1 {
       font-family: var(--font-d);
       font-size: clamp(3.5rem, 7vw, 6.5rem);
       font-weight: 800; line-height: 0.95;
-      letter-spacing: -0.03em; color: var(--forest);
+      letter-spacing: -0.03em; color: var(--green);
       margin-bottom: clamp(1.25rem, 2.5vw, 2rem);
     }
-    .hero-h1 em { font-style: italic; color: var(--terra); font-weight: 300; }
+    .hero-h1 em { font-style: italic; font-weight: 300; color: var(--lime); }
     .hero-desc {
       color: var(--text-mid);
       font-size: clamp(1rem, 1.4vw, 1.15rem);
@@ -130,11 +130,11 @@
       text-decoration: none; font-weight: 500; font-size: 0.875rem;
       transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
-    .btn-store:hover { transform: translateY(-2px); box-shadow: 0 10px 24px oklch(28% 0.09 158 / 0.2); }
-    .btn-apple { background: var(--forest); color: var(--text-on-dk); }
+    .btn-store:hover { transform: translateY(-2px); box-shadow: 0 10px 24px oklch(43% 0.14 158 / 0.2); }
+    .btn-apple { background: var(--green); color: var(--text-on-dk); }
     .btn-google {
-      background: transparent; color: var(--forest);
-      border: 1.5px solid oklch(65% 0.08 140);
+      background: transparent; color: var(--green);
+      border: 1.5px solid var(--divider);
     }
     .btn-lbl { display: flex; flex-direction: column; gap: 0.1em; }
     .btn-lbl small { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.06em; opacity: 0.65; }
@@ -143,19 +143,19 @@
     .avatars { display: flex; }
     .avatars span {
       width: 32px; height: 32px; border-radius: 50%;
-      border: 2px solid var(--cream);
+      border: 2px solid var(--bg);
       display: flex; align-items: center; justify-content: center;
       font-size: 0.7rem; font-weight: 600; margin-left: -9px;
     }
     .avatars span:first-child { margin-left: 0; }
-    .av1 { background: oklch(72% 0.12 155); color: oklch(25% 0.08 158); }
-    .av2 { background: oklch(78% 0.10 48);  color: oklch(35% 0.12 46); }
-    .av3 { background: oklch(68% 0.08 200); color: oklch(28% 0.06 210); }
-    .av4 { background: oklch(75% 0.07 80);  color: oklch(30% 0.05 78); }
+    .av1 { background: oklch(80% 0.14 148); color: oklch(30% 0.10 155); }
+    .av2 { background: oklch(84% 0.12 138); color: oklch(32% 0.12 140); }
+    .av3 { background: oklch(78% 0.10 168); color: oklch(28% 0.08 162); }
+    .av4 { background: oklch(82% 0.08 155); color: oklch(30% 0.07 152); }
     .social-proof p { font-size: 0.85rem; color: var(--text-mid); }
-    .social-proof strong { color: var(--text-dark); }
+    .social-proof strong { color: var(--text-dark); font-weight: 600; }
 
-    /* ── PHONE MOCKUP ── */
+    /* ─── HERO PHONE ─── */
     .phone-wrap {
       position: relative;
       width: clamp(220px, 28vw, 300px); margin-inline: auto;
@@ -165,13 +165,13 @@
       background: oklch(18% 0.03 240);
       border-radius: 44px; padding: 12px;
       box-shadow:
-        0 40px 100px oklch(20% 0.06 160 / 0.38),
-        0 0 0 1px oklch(35% 0.04 200 / 0.4),
-        inset 0 0 0 1px oklch(55% 0.03 210 / 0.15);
+        0 40px 100px oklch(22% 0.08 158 / 0.28),
+        0 0 0 1px oklch(35% 0.04 200 / 0.35),
+        inset 0 0 0 1px oklch(55% 0.03 210 / 0.12);
     }
     .phone-screen {
       width: 100%; height: 100%;
-      background: oklch(90% 0.035 128);
+      background: oklch(90% 0.032 128);
       border-radius: 34px; overflow: hidden; position: relative;
     }
     .phone-notch {
@@ -184,40 +184,35 @@
     .phone-map svg { width: 100%; height: 100%; }
     .phone-stats {
       position: absolute; bottom: 0; left: 0; right: 0;
-      background: var(--cream);
+      background: var(--bg);
       border-radius: 20px 20px 34px 34px;
       padding: 14px 16px 22px;
     }
     .ph-run-lbl {
-      font-size: 8px; font-weight: 500; letter-spacing: 0.12em;
-      text-transform: uppercase; color: var(--forest-light); margin-bottom: 6px;
+      font-size: 8px; font-weight: 600; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--green-mid); margin-bottom: 6px;
     }
     .ph-time {
       font-family: var(--font-d); font-size: 26px; font-weight: 700;
-      color: var(--forest); letter-spacing: -0.02em; line-height: 1; margin-bottom: 10px;
+      color: var(--green); letter-spacing: -0.02em; line-height: 1; margin-bottom: 10px;
     }
     .ph-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
     .ph-val {
       font-family: var(--font-d); font-size: 14px; font-weight: 700;
       color: var(--text-dark); letter-spacing: -0.02em;
     }
-    .ph-key {
-      font-size: 7px; text-transform: uppercase; letter-spacing: 0.1em;
-      color: var(--text-mid); margin-top: 1px;
-    }
+    .ph-key { font-size: 7px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-mid); margin-top: 1px; }
     .ph-btn {
       width: 100%; margin-top: 12px;
-      background: var(--terra); color: oklch(97% 0.015 82);
+      background: var(--lime); color: oklch(22% 0.07 145);
       border: none; border-radius: 50px; padding: 9px;
-      font-size: 10px; font-weight: 600; letter-spacing: 0.06em;
+      font-size: 10px; font-weight: 700; letter-spacing: 0.06em;
       text-transform: uppercase;
     }
-
-    /* floating badges */
     .badge {
       position: absolute; right: -22px; top: 28%;
-      background: var(--cream); border-radius: 14px;
-      padding: 9px 13px; box-shadow: 0 8px 32px oklch(20% 0.06 160 / 0.22);
+      background: var(--bg); border-radius: 14px;
+      padding: 9px 13px; box-shadow: 0 8px 32px oklch(22% 0.08 158 / 0.18);
       display: flex; align-items: center; gap: 8px;
       font-size: 10px; white-space: nowrap;
       animation: floatY 3s ease-in-out infinite;
@@ -226,7 +221,7 @@
     @media (max-width: 900px) { .badge { display: none; } }
     .badge-ico {
       width: 26px; height: 26px; border-radius: 8px;
-      background: var(--terra-pale);
+      background: var(--lime-pale);
       display: flex; align-items: center; justify-content: center; font-size: 13px;
     }
     .badge strong { display: block; font-size: 12px; font-weight: 700; color: var(--text-dark); }
@@ -235,27 +230,25 @@
       0%, 100% { transform: translateY(0); }
       50%       { transform: translateY(-7px); }
     }
-
-    /* route draw animation */
     .route { stroke-dasharray: 1200; stroke-dashoffset: 1200; }
     .route.drawn { animation: drawRoute 2.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
     @keyframes drawRoute { to { stroke-dashoffset: 0; } }
     @media (prefers-reduced-motion: reduce) { .route { stroke-dashoffset: 0; animation: none; } }
 
-    /* ── MANIFESTO ── */
+    /* ─── MANIFESTO ─── */
     .manifesto {
-      background: var(--forest); padding: clamp(5rem, 10vw, 9rem) 0;
+      background: var(--bg-deep); padding: clamp(5rem, 10vw, 9rem) 0;
       position: relative; overflow: hidden;
     }
     .manifesto::before {
       content: ''; position: absolute; inset: 0;
       background-image: repeating-linear-gradient(
-        90deg, oklch(90% 0.03 88 / 0.06) 0, oklch(90% 0.03 88 / 0.06) 1px,
+        90deg, oklch(90% 0.05 148 / 0.06) 0, oklch(90% 0.05 148 / 0.06) 1px,
         transparent 1px, transparent 64px
       );
     }
     .m-label {
-      font-size: 0.7rem; font-weight: 500; letter-spacing: 0.18em;
+      font-size: 0.7rem; font-weight: 600; letter-spacing: 0.18em;
       text-transform: uppercase; color: var(--text-mut-dk);
       margin-bottom: clamp(1.25rem, 2.5vw, 2rem);
     }
@@ -266,30 +259,92 @@
       letter-spacing: -0.02em; color: var(--text-on-dk);
       max-width: 22ch;
     }
-    .m-quote em { font-style: italic; color: oklch(76% 0.12 85); }
-    .m-rule { width: 48px; height: 2px; background: var(--terra); margin-top: clamp(2rem, 4vw, 3.5rem); }
+    .m-quote em { font-style: italic; color: var(--lime-mid); }
+    .m-rule { width: 48px; height: 2px; background: var(--lime); margin-top: clamp(2rem, 4vw, 3.5rem); }
 
-    /* ── FEATURES ── */
-    .features { padding: clamp(7rem, 14vw, 13rem) 0; }
+    /* ─── APP SCREENS SECTION ─── */
+    .app-screens {
+      background: var(--bg-sage);
+      padding: clamp(5rem, 10vw, 9rem) 0;
+      overflow: hidden;
+    }
+    .screens-header { margin-bottom: clamp(3rem, 6vw, 5.5rem); }
     .sec-label {
-      font-size: 0.7rem; font-weight: 500; letter-spacing: 0.18em;
-      text-transform: uppercase; color: var(--terra);
+      font-size: 0.7rem; font-weight: 600; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--lime);
       margin-bottom: clamp(0.875rem, 1.5vw, 1.25rem);
     }
     .sec-title {
       font-family: var(--font-d);
       font-size: clamp(2.2rem, 4vw, 3.5rem);
       font-weight: 700; line-height: 1.1;
-      letter-spacing: -0.02em; color: var(--forest);
-      margin-bottom: clamp(5rem, 10vw, 9rem);
+      letter-spacing: -0.02em; color: var(--green);
     }
+
+    /* Three-phone showcase */
+    .phones-showcase {
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      gap: clamp(0.5rem, 2vw, 2rem);
+    }
+    .showcase-phone {
+      position: relative;
+      flex-shrink: 0;
+    }
+    .showcase-phone.center {
+      z-index: 2;
+      width: clamp(200px, 24vw, 280px);
+    }
+    .showcase-phone.side {
+      width: clamp(160px, 18vw, 220px);
+      opacity: 0.88;
+    }
+    .showcase-phone.left  { transform: rotate(-4deg) translateY(28px); transform-origin: bottom center; }
+    .showcase-phone.right { transform: rotate(4deg)  translateY(28px); transform-origin: bottom center; }
+
+    @media (max-width: 640px) {
+      .showcase-phone.side { display: none; }
+      .showcase-phone.center { width: clamp(200px, 70vw, 280px); }
+    }
+
+    .sp-device {
+      width: 100%; aspect-ratio: 9/19.5;
+      background: oklch(16% 0.025 240);
+      border-radius: 40px; padding: 10px;
+      box-shadow:
+        0 30px 70px oklch(22% 0.08 158 / 0.25),
+        0 0 0 1px oklch(35% 0.04 200 / 0.3),
+        inset 0 0 0 1px oklch(55% 0.03 210 / 0.1);
+    }
+    .sp-screen {
+      width: 100%; height: 100%;
+      border-radius: 32px; overflow: hidden; position: relative;
+    }
+    .sp-notch {
+      position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+      width: 35%; height: 22px;
+      background: oklch(16% 0.025 240);
+      border-radius: 0 0 14px 14px; z-index: 10;
+    }
+
+    /* Screen label below phone */
+    .sp-label {
+      text-align: center; margin-top: 1rem;
+      font-size: 0.75rem; font-weight: 500;
+      color: var(--text-mid); letter-spacing: 0.02em;
+    }
+    .sp-label strong { display: block; color: var(--green); font-size: 0.85rem; margin-bottom: 2px; }
+
+    /* ─── FEATURES ─── */
+    .features { padding: clamp(7rem, 14vw, 13rem) 0; }
     .feat {
       display: grid; grid-template-columns: 1fr 1fr;
       gap: clamp(3rem, 6vw, 5.5rem); align-items: center;
       padding: clamp(3rem, 6vw, 5.5rem) 0;
-      border-top: 1px solid oklch(80% 0.02 85);
+      border-top: 1px solid var(--divider);
     }
-    .feat:last-child { border-bottom: 1px solid oklch(80% 0.02 85); }
+    .feat:last-child { border-bottom: 1px solid var(--divider); }
     .feat.rev .feat-vis { order: -1; }
     @media (max-width: 768px) {
       .feat { grid-template-columns: 1fr; }
@@ -303,24 +358,24 @@
       font-family: var(--font-d);
       font-size: clamp(1.8rem, 3vw, 2.8rem);
       font-weight: 700; line-height: 1.1;
-      letter-spacing: -0.02em; color: var(--forest);
+      letter-spacing: -0.02em; color: var(--green);
       margin-bottom: clamp(0.875rem, 1.5vw, 1.25rem);
     }
     .feat-desc { color: var(--text-mid); font-size: 0.95rem; line-height: 1.7; max-width: 38ch; }
     .feat-vis {
       aspect-ratio: 4/3; border-radius: 20px;
-      background: var(--cream-mid); overflow: hidden;
+      background: var(--bg-sage); overflow: hidden;
       display: flex; align-items: center; justify-content: center;
     }
     .feat-vis svg { width: 100%; height: 100%; }
 
-    /* ── SOCIAL PROOF ── */
-    .quotes-sec { background: var(--cream-mid); padding: clamp(5rem, 10vw, 9rem) 0; }
+    /* ─── SOCIAL PROOF ─── */
+    .quotes-sec { background: var(--bg-sage); padding: clamp(5rem, 10vw, 9rem) 0; }
     .q-grid {
       display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
       gap: clamp(2rem, 4vw, 3.5rem); margin-top: clamp(3rem, 6vw, 5.5rem);
     }
-    .q-item { border-top: 2px solid var(--cream-dark); padding-top: clamp(1.25rem, 2.5vw, 2rem); }
+    .q-item { border-top: 2px solid var(--divider); padding-top: clamp(1.25rem, 2.5vw, 2rem); }
     .q-text {
       font-family: var(--font-d); font-style: italic; font-weight: 300;
       font-size: clamp(1rem, 1.3vw, 1.15rem); line-height: 1.6; color: var(--text-dark);
@@ -329,9 +384,9 @@
     .q-by { font-size: 0.8rem; color: var(--text-mid); }
     .q-by strong { display: block; color: var(--text-dark); font-weight: 500; margin-bottom: 2px; }
 
-    /* ── DOWNLOAD ── */
+    /* ─── DOWNLOAD ─── */
     .dl-sec {
-      background: var(--forest); padding: clamp(7rem, 14vw, 13rem) 0;
+      background: var(--bg-deep); padding: clamp(7rem, 14vw, 13rem) 0;
       position: relative; overflow: hidden;
     }
     .dl-topo {
@@ -340,8 +395,10 @@
       opacity: 0.05; width: 130%; pointer-events: none;
     }
     .dl-inner { position: relative; z-index: 1; }
-    .dl-label { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.18em;
-      text-transform: uppercase; color: var(--text-mut-dk); margin-bottom: clamp(0.875rem, 1.5vw, 1.25rem);
+    .dl-label {
+      font-size: 0.7rem; font-weight: 600; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--text-mut-dk);
+      margin-bottom: clamp(0.875rem, 1.5vw, 1.25rem);
     }
     .dl-title {
       font-family: var(--font-d);
@@ -349,41 +406,36 @@
       font-weight: 800; line-height: 1; letter-spacing: -0.03em;
       color: var(--text-on-dk); margin-bottom: clamp(1.25rem, 2.5vw, 2rem);
     }
-    .dl-title em { font-style: italic; font-weight: 300; color: oklch(76% 0.12 85); }
+    .dl-title em { font-style: italic; font-weight: 300; color: var(--lime-mid); }
     .dl-sub {
       color: var(--text-mut-dk); font-size: clamp(0.95rem, 1.3vw, 1.1rem);
       max-width: 42ch; line-height: 1.65; margin-bottom: clamp(2rem, 4vw, 3.5rem);
     }
     .dl-btns { display: flex; gap: clamp(0.875rem, 1.5vw, 1.25rem); flex-wrap: wrap; }
-    .btn-solid {
-      background: var(--terra); color: oklch(97% 0.015 82);
-      border: 1px solid transparent;
-    }
-    .btn-solid:hover { background: oklch(64% 0.18 46); }
+    .btn-solid { background: var(--lime); color: oklch(22% 0.07 145); border: 1px solid transparent; }
+    .btn-solid:hover { background: oklch(63% 0.21 138); }
     .btn-ghost {
-      background: oklch(97% 0.015 82 / 0.1);
+      background: oklch(95% 0.018 148 / 0.1);
       color: var(--text-on-dk);
-      border: 1px solid oklch(90% 0.02 88 / 0.2);
+      border: 1px solid oklch(90% 0.02 148 / 0.22);
     }
-    .btn-ghost:hover { background: oklch(97% 0.015 82 / 0.18); }
+    .btn-ghost:hover { background: oklch(95% 0.018 148 / 0.18); }
 
-    /* ── FOOTER ── */
-    .footer {
-      background: oklch(22% 0.07 158); padding: clamp(1.25rem, 2.5vw, 2rem) 0;
-    }
+    /* ─── FOOTER ─── */
+    .footer { background: oklch(28% 0.08 158); padding: clamp(1.25rem, 2.5vw, 2rem) 0; }
     .footer-inner {
       display: flex; align-items: center; justify-content: space-between;
       flex-wrap: wrap; gap: clamp(0.875rem, 1.5vw, 1.25rem);
     }
     .f-logo { font-family: var(--font-d); font-size: 1.2rem; font-weight: 800;
-      color: oklch(72% 0.06 155); letter-spacing: -0.02em;
+      color: oklch(75% 0.10 148); letter-spacing: -0.02em;
     }
     .f-links { display: flex; gap: clamp(1.25rem, 2.5vw, 2rem); list-style: none; }
-    .f-links a { font-size: 0.8rem; color: oklch(52% 0.04 155); text-decoration: none; transition: color 0.2s; }
-    .f-links a:hover { color: oklch(72% 0.06 155); }
-    .f-copy { font-size: 0.8rem; color: oklch(48% 0.04 155); }
+    .f-links a { font-size: 0.8rem; color: oklch(58% 0.06 148); text-decoration: none; transition: color 0.2s; }
+    .f-links a:hover { color: oklch(75% 0.10 148); }
+    .f-copy { font-size: 0.8rem; color: oklch(52% 0.05 148); }
 
-    /* ── REVEAL ANIMATION ── */
+    /* ─── REVEAL ─── */
     [data-r] {
       opacity: 0; transform: translateY(22px);
       transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
@@ -407,6 +459,7 @@
     <div class="nav-inner">
       <a href="#" class="nav-logo">STRIDE</a>
       <ul class="nav-links">
+        <li><a href="#screens">App</a></li>
         <li><a href="#features">Features</a></li>
         <li><a href="#community">Stories</a></li>
         <li><a href="#download">Download</a></li>
@@ -418,22 +471,19 @@
 
 <!-- HERO -->
 <section class="hero">
-  <!-- topo lines decoration -->
   <svg class="hero-topo" viewBox="0 0 600 600" fill="none" aria-hidden="true">
-    <ellipse cx="300" cy="300" rx="280" ry="196" stroke="var(--forest)" stroke-width="1.5"/>
-    <ellipse cx="300" cy="300" rx="240" ry="163" stroke="var(--forest)" stroke-width="1.5"/>
-    <ellipse cx="300" cy="300" rx="200" ry="130" stroke="var(--forest)" stroke-width="1.5"/>
-    <ellipse cx="300" cy="300" rx="160" ry="98"  stroke="var(--forest)" stroke-width="1.5"/>
-    <ellipse cx="300" cy="300" rx="118" ry="67"  stroke="var(--forest)" stroke-width="1.5"/>
-    <ellipse cx="300" cy="300" rx="78"  cy="38"  stroke="var(--forest)" stroke-width="1.5"/>
-    <ellipse cx="280" cy="310" rx="270" ry="175" stroke="var(--forest)" stroke-width="1" transform="rotate(-12 280 310)"/>
-    <ellipse cx="280" cy="310" rx="210" ry="135" stroke="var(--forest)" stroke-width="1" transform="rotate(-12 280 310)"/>
-    <ellipse cx="280" cy="310" rx="150" ry="95"  stroke="var(--forest)" stroke-width="1" transform="rotate(-12 280 310)"/>
+    <ellipse cx="300" cy="300" rx="280" ry="196" stroke="var(--green)" stroke-width="1.5"/>
+    <ellipse cx="300" cy="300" rx="240" ry="163" stroke="var(--green)" stroke-width="1.5"/>
+    <ellipse cx="300" cy="300" rx="200" ry="130" stroke="var(--green)" stroke-width="1.5"/>
+    <ellipse cx="300" cy="300" rx="160" ry="98"  stroke="var(--green)" stroke-width="1.5"/>
+    <ellipse cx="300" cy="300" rx="118" ry="67"  stroke="var(--green)" stroke-width="1.5"/>
+    <ellipse cx="280" cy="310" rx="270" ry="175" stroke="var(--green)" stroke-width="1" transform="rotate(-12 280 310)"/>
+    <ellipse cx="280" cy="310" rx="210" ry="135" stroke="var(--green)" stroke-width="1" transform="rotate(-12 280 310)"/>
+    <ellipse cx="280" cy="310" rx="150" ry="95"  stroke="var(--green)" stroke-width="1" transform="rotate(-12 280 310)"/>
   </svg>
 
   <div class="wrap">
     <div class="hero-inner">
-      <!-- text -->
       <div>
         <div class="hero-tag" data-r>Your running companion</div>
         <h1 class="hero-h1" data-r data-d="1">
@@ -466,7 +516,7 @@
         </div>
       </div>
 
-      <!-- phone -->
+      <!-- Hero phone -->
       <div class="hero-phone-col" data-r data-d="2">
         <div class="phone-wrap">
           <div class="badge">
@@ -482,9 +532,7 @@
             <div class="phone-screen">
               <div class="phone-map">
                 <svg viewBox="0 0 300 580" xmlns="http://www.w3.org/2000/svg">
-                  <!-- map bg -->
                   <rect width="300" height="580" fill="oklch(90% 0.032 128)"/>
-                  <!-- streets -->
                   <line x1="0"   y1="120" x2="300" y2="120" stroke="oklch(98% 0.01 88)" stroke-width="8"/>
                   <line x1="0"   y1="205" x2="300" y2="205" stroke="oklch(98% 0.01 88)" stroke-width="5"/>
                   <line x1="0"   y1="290" x2="300" y2="318" stroke="oklch(98% 0.01 88)" stroke-width="8"/>
@@ -492,20 +540,16 @@
                   <line x1="60"  y1="0"   x2="60"  y2="580" stroke="oklch(98% 0.01 88)" stroke-width="5"/>
                   <line x1="145" y1="0"   x2="145" y2="580" stroke="oklch(98% 0.01 88)" stroke-width="8"/>
                   <line x1="225" y1="0"   x2="225" y2="580" stroke="oklch(98% 0.01 88)" stroke-width="5"/>
-                  <!-- park blocks -->
-                  <rect x="162" y="130" width="55" height="65" rx="4" fill="oklch(72% 0.13 148)" opacity="0.55"/>
-                  <rect x="8"   y="215" width="44" height="65" rx="4" fill="oklch(72% 0.13 148)" opacity="0.55"/>
-                  <!-- running route -->
+                  <rect x="162" y="130" width="55" height="65" rx="4" fill="oklch(72% 0.14 148)" opacity="0.55"/>
+                  <rect x="8"   y="215" width="44" height="65" rx="4" fill="oklch(72% 0.14 148)" opacity="0.55"/>
                   <path class="route"
                     d="M 145 530 L 145 390 Q 155 355 185 345 L 225 345 Q 255 345 255 315 L 255 205 Q 255 170 225 160 L 162 160 Q 145 160 145 140 L 145 80 Q 145 50 122 42 L 82 42 Q 60 42 60 62 L 60 205 Q 60 225 82 235 L 145 255 Q 165 265 162 290 L 145 410 L 145 530"
-                    fill="none" stroke="var(--terra)" stroke-width="3.5"
+                    fill="none" stroke="var(--lime)" stroke-width="3.5"
                     stroke-linecap="round" stroke-linejoin="round"/>
-                  <!-- start dot -->
-                  <circle cx="145" cy="530" r="7"  fill="var(--terra)" opacity="0.9"/>
-                  <circle cx="145" cy="530" r="13" fill="var(--terra)" opacity="0.22"/>
-                  <!-- current position -->
-                  <circle cx="145" cy="80" r="7"  fill="var(--forest)"/>
-                  <circle cx="145" cy="80" r="13" fill="var(--forest)" opacity="0.28"/>
+                  <circle cx="145" cy="530" r="7"  fill="var(--lime)"/>
+                  <circle cx="145" cy="530" r="13" fill="var(--lime)" opacity="0.25"/>
+                  <circle cx="145" cy="80" r="7"  fill="var(--green)"/>
+                  <circle cx="145" cy="80" r="13" fill="var(--green)" opacity="0.3"/>
                 </svg>
               </div>
               <div class="phone-stats">
@@ -541,13 +585,204 @@
   </div>
 </section>
 
+<!-- APP SCREENS -->
+<section class="app-screens" id="screens">
+  <div class="wrap">
+    <div class="screens-header">
+      <p class="sec-label" data-r>App Preview</p>
+      <h2 class="sec-title" data-r data-d="1">Simple by design.<br>Powerful by nature.</h2>
+    </div>
+  </div>
+
+  <!-- Three phones -->
+  <div class="phones-showcase" data-r data-d="2">
+
+    <!-- Left phone: Run summary -->
+    <div class="showcase-phone side left">
+      <div class="sp-device">
+        <div class="sp-notch"></div>
+        <div class="sp-screen">
+          <svg viewBox="0 0 260 560" xmlns="http://www.w3.org/2000/svg">
+            <!-- bg -->
+            <rect width="260" height="560" fill="oklch(98% 0.012 148)"/>
+            <!-- header -->
+            <rect width="260" height="80" fill="var(--green)"/>
+            <text x="20" y="38" font-family="DM Sans, sans-serif" font-size="10" fill="oklch(72% 0.06 148)" letter-spacing="0.08em" font-weight="500">MONDAY · MAR 30</text>
+            <text x="20" y="62" font-family="Fraunces, serif" font-size="20" fill="oklch(95% 0.018 148)" font-weight="700">Run Complete</text>
+            <!-- big stat -->
+            <text x="20" y="128" font-family="Fraunces, serif" font-size="64" fill="var(--green)" font-weight="800" letter-spacing="-3">8.4</text>
+            <text x="124" y="128" font-family="DM Sans, sans-serif" font-size="14" fill="var(--text-mid)" font-weight="400">km</text>
+            <!-- divider -->
+            <line x1="20" y1="148" x2="240" y2="148" stroke="oklch(88% 0.025 148)" stroke-width="1"/>
+            <!-- stats row -->
+            <text x="20"  y="174" font-family="Fraunces, serif" font-size="18" fill="var(--text-dark)" font-weight="700">46:22</text>
+            <text x="20"  y="188" font-family="DM Sans, sans-serif" font-size="8" fill="var(--text-mid)" letter-spacing="0.08em">DURATION</text>
+            <text x="108" y="174" font-family="Fraunces, serif" font-size="18" fill="var(--text-dark)" font-weight="700">5:31</text>
+            <text x="108" y="188" font-family="DM Sans, sans-serif" font-size="8" fill="var(--text-mid)" letter-spacing="0.08em">AVG PACE</text>
+            <text x="185" y="174" font-family="Fraunces, serif" font-size="18" fill="var(--text-dark)" font-weight="700">412</text>
+            <text x="185" y="188" font-family="DM Sans, sans-serif" font-size="8" fill="var(--text-mid)" letter-spacing="0.08em">CALORIES</text>
+            <!-- mini map -->
+            <rect x="20" y="206" width="220" height="140" rx="12" fill="oklch(90% 0.032 128)"/>
+            <!-- streets in mini map -->
+            <line x1="20"  y1="256" x2="240" y2="256" stroke="oklch(98% 0.01 88)" stroke-width="4"/>
+            <line x1="20"  y1="296" x2="240" y2="310" stroke="oklch(98% 0.01 88)" stroke-width="4"/>
+            <line x1="80"  y1="206" x2="80"  y2="346" stroke="oklch(98% 0.01 88)" stroke-width="4"/>
+            <line x1="150" y1="206" x2="150" y2="346" stroke="oklch(98% 0.01 88)" stroke-width="4"/>
+            <!-- route on mini map -->
+            <path d="M 80 326 L 80 296 Q 80 272 100 265 L 130 258 Q 150 256 150 246 L 150 228 L 130 228 Q 80 228 80 248 L 80 256 L 80 326"
+              stroke="var(--lime)" stroke-width="3" fill="none" stroke-linecap="round"/>
+            <!-- heart rate section -->
+            <text x="20" y="372" font-family="DM Sans, sans-serif" font-size="9" fill="var(--text-mid)" letter-spacing="0.08em">HEART RATE ZONES</text>
+            <rect x="20" y="380" width="34" height="12" rx="3" fill="oklch(68% 0.20 138)" opacity="0.85"/>
+            <rect x="58" y="380" width="60" height="12" rx="3" fill="oklch(43% 0.14 158)" opacity="0.85"/>
+            <rect x="122" y="380" width="44" height="12" rx="3" fill="oklch(58% 0.20 34)"  opacity="0.7"/>
+            <rect x="170" y="380" width="26" height="12" rx="3" fill="oklch(52% 0.20 22)"  opacity="0.65"/>
+            <text x="20"  y="404" font-family="DM Sans, sans-serif" font-size="7.5" fill="oklch(60% 0.12 138)">Zone 1</text>
+            <text x="58"  y="404" font-family="DM Sans, sans-serif" font-size="7.5" fill="var(--green)">Zone 2 (main)</text>
+            <text x="122" y="404" font-family="DM Sans, sans-serif" font-size="7.5" fill="oklch(58% 0.20 34)">Zone 3</text>
+            <text x="170" y="404" font-family="DM Sans, sans-serif" font-size="7.5" fill="oklch(50% 0.20 22)">Z4</text>
+            <!-- share / save button -->
+            <rect x="20" y="432" width="220" height="42" rx="21" fill="var(--green)"/>
+            <text x="130" y="458" font-family="DM Sans, sans-serif" font-size="12" fill="oklch(95% 0.018 148)" font-weight="600" text-anchor="middle" letter-spacing="0.04em">Save Run</text>
+            <!-- history bar -->
+            <text x="20" y="498" font-family="DM Sans, sans-serif" font-size="8" fill="var(--text-mid)" letter-spacing="0.08em">THIS WEEK</text>
+            <rect x="20"  y="506" width="22" height="20" rx="3" fill="var(--lime-pale)"/>
+            <rect x="20"  y="514" width="22" height="12" rx="2" fill="var(--lime)"/>
+            <rect x="48"  y="506" width="22" height="20" rx="3" fill="var(--lime-pale)"/>
+            <rect x="48"  y="510" width="22" height="16" rx="2" fill="var(--lime)"/>
+            <rect x="76"  y="506" width="22" height="20" rx="3" fill="var(--lime-pale)"/>
+            <rect x="76"  y="518" width="22" height="8"  rx="2" fill="var(--lime)"/>
+            <rect x="104" y="506" width="22" height="20" rx="3" fill="var(--lime-pale)"/>
+            <rect x="132" y="506" width="22" height="20" rx="3" fill="var(--lime-pale)"/>
+            <rect x="132" y="506" width="22" height="20" rx="2" fill="var(--lime)"/>
+          </svg>
+        </div>
+      </div>
+      <p class="sp-label"><strong>Run Summary</strong>Post-run overview</p>
+    </div>
+
+    <!-- Center phone: Active run -->
+    <div class="showcase-phone center">
+      <div class="sp-device">
+        <div class="sp-notch"></div>
+        <div class="sp-screen">
+          <svg viewBox="0 0 300 580" xmlns="http://www.w3.org/2000/svg">
+            <rect width="300" height="580" fill="oklch(90% 0.032 128)"/>
+            <!-- map streets -->
+            <line x1="0"   y1="120" x2="300" y2="120" stroke="oklch(98% 0.01 88)" stroke-width="8"/>
+            <line x1="0"   y1="205" x2="300" y2="205" stroke="oklch(98% 0.01 88)" stroke-width="5"/>
+            <line x1="0"   y1="290" x2="300" y2="318" stroke="oklch(98% 0.01 88)" stroke-width="8"/>
+            <line x1="0"   y1="390" x2="300" y2="378" stroke="oklch(98% 0.01 88)" stroke-width="5"/>
+            <line x1="60"  y1="0"   x2="60"  y2="580" stroke="oklch(98% 0.01 88)" stroke-width="5"/>
+            <line x1="145" y1="0"   x2="145" y2="580" stroke="oklch(98% 0.01 88)" stroke-width="8"/>
+            <line x1="225" y1="0"   x2="225" y2="580" stroke="oklch(98% 0.01 88)" stroke-width="5"/>
+            <!-- parks -->
+            <rect x="162" y="130" width="55" height="65" rx="4" fill="oklch(72% 0.14 148)" opacity="0.55"/>
+            <rect x="8"   y="215" width="44" height="65" rx="4" fill="oklch(72% 0.14 148)" opacity="0.55"/>
+            <!-- route -->
+            <path d="M 145 530 L 145 390 Q 155 355 185 345 L 225 345 Q 255 345 255 315 L 255 205 Q 255 170 225 160 L 162 160 Q 145 160 145 140 L 145 80 Q 145 50 122 42 L 82 42 Q 60 42 60 62 L 60 205 Q 60 225 82 235 L 145 255 Q 165 265 162 290 L 145 410 L 145 530"
+              fill="none" stroke="var(--lime)" stroke-width="3.5"
+              stroke-linecap="round" stroke-linejoin="round"/>
+            <!-- start -->
+            <circle cx="145" cy="530" r="7"  fill="var(--lime)"/>
+            <circle cx="145" cy="530" r="13" fill="var(--lime)" opacity="0.25"/>
+            <!-- current pos -->
+            <circle cx="145" cy="80" r="8"  fill="var(--green)"/>
+            <circle cx="145" cy="80" r="14" fill="var(--green)" opacity="0.3"/>
+            <!-- stats panel -->
+            <rect x="0" y="390" width="300" height="190" fill="oklch(98.5% 0.010 148)"/>
+            <text x="20" y="420" font-family="DM Sans, sans-serif" font-size="8.5" fill="var(--green-mid)" letter-spacing="0.12em" font-weight="600">ACTIVE RUN</text>
+            <text x="20" y="452" font-family="Fraunces, serif" font-size="36" fill="var(--green)" font-weight="800" letter-spacing="-1">34:18</text>
+            <!-- mini stats -->
+            <text x="20"  y="476" font-family="Fraunces, serif" font-size="18" fill="var(--text-dark)" font-weight="700">5.2</text>
+            <text x="20"  y="490" font-family="DM Sans, sans-serif" font-size="7.5" fill="var(--text-mid)" letter-spacing="0.1em">KM</text>
+            <text x="110" y="476" font-family="Fraunces, serif" font-size="18" fill="var(--text-dark)" font-weight="700">6:35</text>
+            <text x="110" y="490" font-family="DM Sans, sans-serif" font-size="7.5" fill="var(--text-mid)" letter-spacing="0.1em">PACE /KM</text>
+            <text x="204" y="476" font-family="Fraunces, serif" font-size="18" fill="var(--text-dark)" font-weight="700">148</text>
+            <text x="204" y="490" font-family="DM Sans, sans-serif" font-size="7.5" fill="var(--text-mid)" letter-spacing="0.1em">BPM</text>
+            <!-- pause btn -->
+            <rect x="20" y="502" width="260" height="44" rx="22" fill="var(--lime)"/>
+            <text x="150" y="529" font-family="DM Sans, sans-serif" font-size="11" fill="oklch(22% 0.07 145)" font-weight="700" text-anchor="middle" letter-spacing="0.05em">⏸  PAUSE RUN</text>
+          </svg>
+        </div>
+      </div>
+      <p class="sp-label"><strong>During Run</strong>Live map &amp; stats</p>
+    </div>
+
+    <!-- Right phone: History / streak -->
+    <div class="showcase-phone side right">
+      <div class="sp-device">
+        <div class="sp-notch"></div>
+        <div class="sp-screen">
+          <svg viewBox="0 0 260 560" xmlns="http://www.w3.org/2000/svg">
+            <rect width="260" height="560" fill="oklch(98% 0.012 148)"/>
+            <!-- header -->
+            <text x="20" y="50"  font-family="Fraunces, serif" font-size="22" fill="var(--green)" font-weight="800">History</text>
+            <text x="20" y="68"  font-family="DM Sans, sans-serif" font-size="9" fill="var(--text-mid)">March 2026</text>
+            <!-- streak -->
+            <rect x="20" y="82" width="220" height="52" rx="14" fill="var(--lime-pale)"/>
+            <text x="36"  y="103" font-family="Fraunces, serif" font-size="22" fill="var(--green)" font-weight="800">12</text>
+            <text x="66"  y="103" font-family="DM Sans, sans-serif" font-size="11" fill="var(--green)" font-weight="500">day streak 🔥</text>
+            <text x="36"  y="120" font-family="DM Sans, sans-serif" font-size="8.5" fill="oklch(52% 0.08 148)">Keep going — best is 18 days</text>
+            <!-- weekly chart -->
+            <text x="20"  y="158" font-family="DM Sans, sans-serif" font-size="8" fill="var(--text-mid)" letter-spacing="0.08em">DISTANCE THIS WEEK (km)</text>
+            <!-- bar chart -->
+            <rect x="20"  y="172" width="24" height="44" rx="4" fill="var(--lime-pale)"/>
+            <rect x="20"  y="196" width="24" height="20" rx="3" fill="var(--lime)"/>
+            <rect x="50"  y="172" width="24" height="44" rx="4" fill="var(--lime-pale)"/>
+            <rect x="50"  y="184" width="24" height="32" rx="3" fill="var(--lime)"/>
+            <rect x="80"  y="172" width="24" height="44" rx="4" fill="var(--lime-pale)"/>
+            <rect x="80"  y="200" width="24" height="16" rx="3" fill="var(--lime)"/>
+            <rect x="110" y="172" width="24" height="44" rx="4" fill="var(--lime-pale)"/>
+            <rect x="140" y="172" width="24" height="44" rx="4" fill="var(--lime-pale)"/>
+            <rect x="140" y="172" width="24" height="44" rx="3" fill="var(--green)" opacity="0.9"/>
+            <rect x="170" y="172" width="24" height="44" rx="4" fill="var(--lime-pale)"/>
+            <rect x="170" y="176" width="24" height="40" rx="3" fill="var(--lime)"/>
+            <rect x="200" y="172" width="24" height="44" rx="4" fill="var(--lime-pale)"/>
+            <rect x="200" y="190" width="24" height="26" rx="3" fill="var(--lime)"/>
+            <text x="20"  y="228" font-family="DM Sans, sans-serif" font-size="7.5" fill="var(--text-mid)">M</text>
+            <text x="50"  y="228" font-family="DM Sans, sans-serif" font-size="7.5" fill="var(--text-mid)">T</text>
+            <text x="80"  y="228" font-family="DM Sans, sans-serif" font-size="7.5" fill="var(--text-mid)">W</text>
+            <text x="110" y="228" font-family="DM Sans, sans-serif" font-size="7.5" fill="var(--text-mid)">T</text>
+            <text x="140" y="228" font-family="DM Sans, sans-serif" font-size="7.5" fill="var(--green)" font-weight="600">F</text>
+            <text x="170" y="228" font-family="DM Sans, sans-serif" font-size="7.5" fill="var(--text-mid)">S</text>
+            <text x="200" y="228" font-family="DM Sans, sans-serif" font-size="7.5" fill="var(--text-mid)">S</text>
+            <!-- run list -->
+            <text x="20" y="256" font-family="DM Sans, sans-serif" font-size="8" fill="var(--text-mid)" letter-spacing="0.08em">RECENT RUNS</text>
+            <!-- run items -->
+            <line x1="20" y1="264" x2="240" y2="264" stroke="oklch(88% 0.025 148)" stroke-width="0.8"/>
+            <text x="20"  y="284" font-family="Fraunces, serif" font-size="14" fill="var(--text-dark)" font-weight="700">8.4 km</text>
+            <text x="20"  y="298" font-family="DM Sans, sans-serif" font-size="8" fill="var(--text-mid)">Today · 46:22 · 5:31/km</text>
+            <text x="220" y="284" font-family="DM Sans, sans-serif" font-size="8" fill="var(--lime)" font-weight="600" text-anchor="end">PR ↑</text>
+            <line x1="20" y1="308" x2="240" y2="308" stroke="oklch(88% 0.025 148)" stroke-width="0.8"/>
+            <text x="20"  y="328" font-family="Fraunces, serif" font-size="14" fill="var(--text-dark)" font-weight="700">5.1 km</text>
+            <text x="20"  y="342" font-family="DM Sans, sans-serif" font-size="8" fill="var(--text-mid)">Sat · 30:14 · 5:55/km</text>
+            <line x1="20" y1="352" x2="240" y2="352" stroke="oklch(88% 0.025 148)" stroke-width="0.8"/>
+            <text x="20"  y="372" font-family="Fraunces, serif" font-size="14" fill="var(--text-dark)" font-weight="700">6.8 km</text>
+            <text x="20"  y="386" font-family="DM Sans, sans-serif" font-size="8" fill="var(--text-mid)">Fri · 38:45 · 5:42/km</text>
+            <line x1="20" y1="396" x2="240" y2="396" stroke="oklch(88% 0.025 148)" stroke-width="0.8"/>
+            <text x="20"  y="416" font-family="Fraunces, serif" font-size="14" fill="var(--text-dark)" font-weight="700">4.2 km</text>
+            <text x="20"  y="430" font-family="DM Sans, sans-serif" font-size="8" fill="var(--text-mid)">Wed · 25:08 · 5:59/km</text>
+            <!-- total monthly -->
+            <rect x="20" y="450" width="220" height="56" rx="14" fill="var(--bg-deep)"/>
+            <text x="36" y="472" font-family="DM Sans, sans-serif" font-size="8.5" fill="var(--text-mut-dk)" letter-spacing="0.06em">MARCH TOTAL</text>
+            <text x="36" y="494" font-family="Fraunces, serif" font-size="22" fill="var(--text-on-dk)" font-weight="800">87.4 km</text>
+            <text x="165" y="494" font-family="DM Sans, sans-serif" font-size="8.5" fill="var(--lime-mid)" dy="0">↑ 12% vs Feb</text>
+          </svg>
+        </div>
+      </div>
+      <p class="sp-label"><strong>History</strong>Streak &amp; progress</p>
+    </div>
+
+  </div>
+</section>
+
 <!-- FEATURES -->
 <section class="features" id="features">
   <div class="wrap">
     <p class="sec-label" data-r>What Stride does</p>
-    <h2 class="sec-title" data-r data-d="1">Everything you need.<br>Nothing you don't.</h2>
+    <h2 class="sec-title" style="margin-bottom: clamp(5rem, 10vw, 9rem)" data-r data-d="1">Everything you need.<br>Nothing you don't.</h2>
 
-    <!-- Feature 1 -->
     <div class="feat">
       <div data-r>
         <p class="feat-num">01 — Pace</p>
@@ -559,33 +794,27 @@
       </div>
       <div class="feat-vis" data-r data-d="1">
         <svg viewBox="0 0 320 240" xmlns="http://www.w3.org/2000/svg">
-          <rect width="320" height="240" fill="var(--cream)"/>
-          <text x="24" y="36" font-family="DM Sans, sans-serif" font-size="10" fill="oklch(55% 0.04 75)" letter-spacing="0.1em">PACE / KM</text>
-          <!-- grid lines -->
-          <line x1="24" y1="175" x2="296" y2="175" stroke="oklch(84% 0.02 85)" stroke-width="1"/>
-          <line x1="24" y1="135" x2="296" y2="135" stroke="oklch(84% 0.02 85)" stroke-width="1" stroke-dasharray="3 5"/>
-          <line x1="24" y1="95"  x2="296" y2="95"  stroke="oklch(84% 0.02 85)" stroke-width="1" stroke-dasharray="3 5"/>
-          <!-- area -->
+          <rect width="320" height="240" fill="var(--bg)"/>
+          <text x="24" y="36" font-family="DM Sans, sans-serif" font-size="10" fill="var(--text-mid)" letter-spacing="0.1em">PACE / KM</text>
+          <line x1="24" y1="175" x2="296" y2="175" stroke="var(--divider)" stroke-width="1"/>
+          <line x1="24" y1="135" x2="296" y2="135" stroke="var(--divider)" stroke-width="1" stroke-dasharray="3 5"/>
+          <line x1="24" y1="95"  x2="296" y2="95"  stroke="var(--divider)" stroke-width="1" stroke-dasharray="3 5"/>
           <path d="M 24 140 Q 60 152 100 134 Q 136 116 168 128 Q 204 140 240 120 Q 272 102 296 112 L 296 175 L 24 175 Z"
-            fill="var(--terra)" opacity="0.1"/>
-          <!-- pace line -->
+            fill="var(--lime)" opacity="0.12"/>
           <path d="M 24 140 Q 60 152 100 134 Q 136 116 168 128 Q 204 140 240 120 Q 272 102 296 112"
-            stroke="var(--terra)" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-          <!-- current label -->
-          <rect x="194" y="56" width="88" height="40" rx="10" fill="var(--forest)"/>
-          <text x="214" y="73" font-family="Fraunces, serif" font-size="17" fill="oklch(91% 0.025 88)" font-weight="700">6:35</text>
-          <text x="214" y="87" font-family="DM Sans, sans-serif" font-size="8" fill="oklch(65% 0.045 140)" letter-spacing="0.05em">current pace</text>
-          <!-- x labels -->
-          <text x="24"  y="196" font-family="DM Sans, sans-serif" font-size="9" fill="oklch(55% 0.04 75)">1km</text>
-          <text x="92"  y="196" font-family="DM Sans, sans-serif" font-size="9" fill="oklch(55% 0.04 75)">2km</text>
-          <text x="158" y="196" font-family="DM Sans, sans-serif" font-size="9" fill="oklch(55% 0.04 75)">3km</text>
-          <text x="224" y="196" font-family="DM Sans, sans-serif" font-size="9" fill="oklch(55% 0.04 75)">4km</text>
-          <text x="280" y="196" font-family="DM Sans, sans-serif" font-size="9" fill="oklch(55% 0.04 75)">5km</text>
+            stroke="var(--lime)" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+          <rect x="194" y="56" width="88" height="40" rx="10" fill="var(--green)"/>
+          <text x="214" y="73" font-family="Fraunces, serif" font-size="17" fill="oklch(95% 0.018 148)" font-weight="700">6:35</text>
+          <text x="214" y="87" font-family="DM Sans, sans-serif" font-size="8" fill="oklch(72% 0.06 148)" letter-spacing="0.05em">current pace</text>
+          <text x="24"  y="196" font-family="DM Sans, sans-serif" font-size="9" fill="var(--text-mid)">1km</text>
+          <text x="92"  y="196" font-family="DM Sans, sans-serif" font-size="9" fill="var(--text-mid)">2km</text>
+          <text x="158" y="196" font-family="DM Sans, sans-serif" font-size="9" fill="var(--text-mid)">3km</text>
+          <text x="224" y="196" font-family="DM Sans, sans-serif" font-size="9" fill="var(--text-mid)">4km</text>
+          <text x="278" y="196" font-family="DM Sans, sans-serif" font-size="9" fill="var(--text-mid)">5km</text>
         </svg>
       </div>
     </div>
 
-    <!-- Feature 2 -->
     <div class="feat rev">
       <div data-r>
         <p class="feat-num">02 — Route</p>
@@ -597,30 +826,25 @@
       </div>
       <div class="feat-vis" data-r data-d="1">
         <svg viewBox="0 0 320 240" xmlns="http://www.w3.org/2000/svg">
-          <rect width="320" height="240" fill="oklch(86% 0.04 145)"/>
-          <!-- terrain -->
-          <ellipse cx="160" cy="120" rx="110" ry="82" fill="oklch(76% 0.10 148)" opacity="0.45"/>
-          <ellipse cx="148" cy="114" rx="72"  ry="55" fill="oklch(68% 0.12 148)" opacity="0.45"/>
-          <!-- streets -->
+          <rect width="320" height="240" fill="oklch(92% 0.03 145)"/>
+          <ellipse cx="160" cy="120" rx="110" ry="82" fill="oklch(80% 0.12 148)" opacity="0.4"/>
+          <ellipse cx="148" cy="114" rx="72"  ry="55" fill="oklch(72% 0.14 148)" opacity="0.4"/>
           <line x1="0"   y1="84"  x2="320" y2="84"  stroke="oklch(98% 0.01 88)" stroke-width="6"/>
           <line x1="0"   y1="156" x2="320" y2="156" stroke="oklch(98% 0.01 88)" stroke-width="6"/>
           <line x1="94"  y1="0"   x2="94"  y2="240" stroke="oklch(98% 0.01 88)" stroke-width="6"/>
           <line x1="226" y1="0"   x2="226" y2="240" stroke="oklch(98% 0.01 88)" stroke-width="6"/>
-          <!-- route -->
           <path d="M 94 195 L 94 156 Q 94 118 126 106 L 180 94 Q 226 84 226 84 L 226 46"
-            stroke="var(--terra)" stroke-width="4.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-          <circle cx="94"  cy="195" r="7"  fill="var(--terra)"/>
-          <circle cx="94"  cy="195" r="12" fill="var(--terra)" opacity="0.28"/>
-          <circle cx="226" cy="46"  r="7"  fill="var(--forest)"/>
-          <circle cx="226" cy="46"  r="12" fill="var(--forest)" opacity="0.28"/>
-          <!-- distance pill -->
-          <rect x="118" y="132" width="68" height="26" rx="13" fill="oklch(97% 0.015 82)" opacity="0.96"/>
-          <text x="152" y="149" font-family="Fraunces, serif" font-size="13" fill="var(--forest)" font-weight="700" text-anchor="middle">7.4 km</text>
+            stroke="var(--lime)" stroke-width="4.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="94"  cy="195" r="7"  fill="var(--lime)"/>
+          <circle cx="94"  cy="195" r="12" fill="var(--lime)" opacity="0.28"/>
+          <circle cx="226" cy="46"  r="7"  fill="var(--green)"/>
+          <circle cx="226" cy="46"  r="12" fill="var(--green)" opacity="0.28"/>
+          <rect x="118" y="132" width="68" height="26" rx="13" fill="oklch(98.5% 0.010 148)" opacity="0.96"/>
+          <text x="152" y="149" font-family="Fraunces, serif" font-size="13" fill="var(--green)" font-weight="700" text-anchor="middle">7.4 km</text>
         </svg>
       </div>
     </div>
 
-    <!-- Feature 3 -->
     <div class="feat">
       <div data-r>
         <p class="feat-num">03 — Heart Rate</p>
@@ -632,32 +856,24 @@
       </div>
       <div class="feat-vis" data-r data-d="1">
         <svg viewBox="0 0 320 240" xmlns="http://www.w3.org/2000/svg">
-          <rect width="320" height="240" fill="var(--cream)"/>
-          <!-- zone bars -->
-          <rect x="24" y="28"  width="272" height="24" rx="5" fill="oklch(52% 0.20 22)" opacity="0.15"/>
+          <rect width="320" height="240" fill="var(--bg)"/>
+          <rect x="24" y="28"  width="272" height="24" rx="5" fill="oklch(52% 0.20 22)" opacity="0.12"/>
           <rect x="24" y="28"  width="46"  height="24" rx="5" fill="oklch(52% 0.20 22)" opacity="0.8"/>
           <text x="78" y="44"  font-family="DM Sans, sans-serif" font-size="10" fill="var(--text-dark)">Zone 5 · Peak · 176–190 bpm</text>
-
-          <rect x="24" y="58"  width="272" height="24" rx="5" fill="oklch(58% 0.20 34)" opacity="0.15"/>
+          <rect x="24" y="58"  width="272" height="24" rx="5" fill="oklch(58% 0.20 34)" opacity="0.12"/>
           <rect x="24" y="58"  width="100" height="24" rx="5" fill="oklch(58% 0.20 34)" opacity="0.8"/>
           <text x="132" y="74" font-family="DM Sans, sans-serif" font-size="10" fill="var(--text-dark)">Zone 4 · Hard · 162–176 bpm</text>
-
-          <rect x="24" y="88"  width="272" height="24" rx="5" fill="var(--terra)" opacity="0.15"/>
-          <rect x="24" y="88"  width="140" height="24" rx="5" fill="var(--terra)" opacity="0.75"/>
+          <rect x="24" y="88"  width="272" height="24" rx="5" fill="oklch(65% 0.18 48)" opacity="0.12"/>
+          <rect x="24" y="88"  width="140" height="24" rx="5" fill="oklch(65% 0.18 48)" opacity="0.75"/>
           <text x="172" y="104" font-family="DM Sans, sans-serif" font-size="10" fill="var(--text-dark)">Zone 3 · Tempo · 148–162</text>
-
-          <!-- zone 2 highlighted -->
-          <rect x="24" y="118" width="272" height="28" rx="5" fill="var(--forest)" opacity="0.12"/>
-          <rect x="24" y="118" width="200" height="28" rx="5" fill="var(--forest)"/>
-          <text x="34" y="136" font-family="DM Sans, sans-serif" font-size="10" fill="oklch(91% 0.025 88)" font-weight="500">NOW — Zone 2 · Aerobic · 135–148 bpm</text>
-
-          <rect x="24" y="152" width="272" height="24" rx="5" fill="oklch(62% 0.11 148)" opacity="0.15"/>
-          <rect x="24" y="152" width="240" height="24" rx="5" fill="oklch(62% 0.11 148)" opacity="0.55"/>
-          <text x="34" y="168" font-family="DM Sans, sans-serif" font-size="10" fill="var(--forest)">Zone 1 · Light · under 135 bpm</text>
-
-          <!-- current bpm -->
-          <text x="24" y="210" font-family="Fraunces, serif" font-size="22" fill="var(--forest)" font-weight="700">148</text>
-          <text x="62" y="210" font-family="DM Sans, sans-serif" font-size="10" fill="oklch(55% 0.04 75)" dy="2">bpm · optimal aerobic zone</text>
+          <rect x="24" y="118" width="272" height="28" rx="5" fill="var(--green)" opacity="0.1"/>
+          <rect x="24" y="118" width="200" height="28" rx="5" fill="var(--green)"/>
+          <text x="34" y="136" font-family="DM Sans, sans-serif" font-size="10" fill="oklch(95% 0.018 148)" font-weight="500">NOW — Zone 2 · Aerobic · 135–148 bpm</text>
+          <rect x="24" y="152" width="272" height="24" rx="5" fill="var(--lime)" opacity="0.12"/>
+          <rect x="24" y="152" width="240" height="24" rx="5" fill="var(--lime)" opacity="0.55"/>
+          <text x="34" y="168" font-family="DM Sans, sans-serif" font-size="10" fill="var(--green)">Zone 1 · Light · under 135 bpm</text>
+          <text x="24" y="210" font-family="Fraunces, serif" font-size="22" fill="var(--green)" font-weight="700">148</text>
+          <text x="62" y="210" font-family="DM Sans, sans-serif" font-size="10" fill="var(--text-mid)" dy="2">bpm · optimal aerobic zone</text>
         </svg>
       </div>
     </div>
@@ -668,9 +884,7 @@
 <section class="quotes-sec" id="community">
   <div class="wrap">
     <p class="sec-label" data-r>From the community</p>
-    <h2 class="sec-title" style="margin-bottom: 0" data-r data-d="1">
-      Built for runners<br>who run for life.
-    </h2>
+    <h2 class="sec-title" style="margin-bottom: 0" data-r data-d="1">Built for runners<br>who run for life.</h2>
     <div class="q-grid">
       <div class="q-item" data-r>
         <p class="q-text">"I've tried every running app. Stride is the first one that doesn't make me feel like I need to check it every 30 seconds. It just... runs with me."</p>
@@ -691,12 +905,11 @@
 <!-- DOWNLOAD -->
 <section class="dl-sec" id="download">
   <svg class="dl-topo" viewBox="0 0 900 400" fill="none" aria-hidden="true">
-    <ellipse cx="450" cy="200" rx="420" ry="190" stroke="oklch(90% 0.03 88)" stroke-width="1.5"/>
-    <ellipse cx="450" cy="200" rx="350" ry="155" stroke="oklch(90% 0.03 88)" stroke-width="1.5"/>
-    <ellipse cx="450" cy="200" rx="280" ry="120" stroke="oklch(90% 0.03 88)" stroke-width="1.5"/>
-    <ellipse cx="450" cy="200" rx="210" ry="86"  stroke="oklch(90% 0.03 88)" stroke-width="1.5"/>
-    <ellipse cx="450" cy="200" rx="140" ry="54"  stroke="oklch(90% 0.03 88)" stroke-width="1.5"/>
-    <ellipse cx="450" cy="200" rx="70"  cy="24"  stroke="oklch(90% 0.03 88)" stroke-width="1.5"/>
+    <ellipse cx="450" cy="200" rx="420" ry="190" stroke="oklch(90% 0.05 148)" stroke-width="1.5"/>
+    <ellipse cx="450" cy="200" rx="350" ry="155" stroke="oklch(90% 0.05 148)" stroke-width="1.5"/>
+    <ellipse cx="450" cy="200" rx="280" ry="120" stroke="oklch(90% 0.05 148)" stroke-width="1.5"/>
+    <ellipse cx="450" cy="200" rx="210" ry="86"  stroke="oklch(90% 0.05 148)" stroke-width="1.5"/>
+    <ellipse cx="450" cy="200" rx="140" ry="54"  stroke="oklch(90% 0.05 148)" stroke-width="1.5"/>
   </svg>
   <div class="wrap">
     <div class="dl-inner">
@@ -740,25 +953,21 @@
 </footer>
 
 <script>
-  // Nav scroll style
   const nav = document.getElementById('nav');
   window.addEventListener('scroll', () => {
     nav.classList.toggle('scrolled', window.scrollY > 50);
   }, { passive: true });
 
-  // Scroll reveal
   const io = new IntersectionObserver((entries) => {
     entries.forEach(e => {
       if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
     });
-  }, { threshold: 0.12, rootMargin: '0px 0px -48px 0px' });
+  }, { threshold: 0.10, rootMargin: '0px 0px -48px 0px' });
 
   document.querySelectorAll('[data-r]').forEach(el => io.observe(el));
 
-  // Hero: trigger immediately on load
   window.addEventListener('load', () => {
     document.querySelectorAll('.hero [data-r]').forEach(el => el.classList.add('in'));
-    // Trigger route draw animation
     setTimeout(() => {
       const route = document.querySelector('.route');
       if (route) route.classList.add('drawn');
